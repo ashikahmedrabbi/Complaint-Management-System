@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-w-!*%9sekstt^h$y*9qc7o#wf_syn#e4i%f4r++h*(-*n(u14&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS =['https://complaint-management-system-mtsy.onrender.com','https://*.127.0.0.1']
 
 
 # Application definition
