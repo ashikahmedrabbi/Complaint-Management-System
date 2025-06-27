@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complaint Detail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/preline@latest/dist/preline.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-white min-h-screen py-10 px-4">
+
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl space-y-6">
+        <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-bold text-blue-700">📝 Complaint Details</h2>
+            <a href="{% url 'worker_dashboard' %}" class="text-sm text-blue-600 hover:underline">← Back to Dashboard</a>
+        </div>
+
+        <div class="space-y-3 text-gray-800">
+            <p><span class="font-semibold text-gray-600">👤 Name:</span> {{ complaint.name }}</p>
+            <p><span class="font-semibold text-gray-600">📧 Email:</span> {{ complaint.email }}</p>
+            <p><span class="font-semibold text-gray-600">📞 Phone:</span> {{ complaint.phone }}</p>
+            <p><span class="font-semibold text-gray-600">📝 Description:</span> {{ complaint.description }}</p>
+            <p>
+                <span class="font-semibold text-gray-600">📌 Status:</span>
+                {% if complaint.status == 'Pending' %}
+                    <span class="text-yellow-600 font-medium">Pending</span>
+                {% elif complaint.status == 'In Progress' %}
+                    <span class="text-blue-600 font-medium">In Progress</span>
+                {% else %}
+                    <span class="text-green-600 font-medium">Completed</span>
+                {% endif %}
+            </p>
+        </div>
+
+        {% if complaint.status != 'Completed' %}
+        <form method="post" class="pt-4 border-t border-gray-200">
+            {% csrf_token %}
+            <button type="submit"
+                    class="bg-green-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-green-700 transition duration-300">
+                ✅ Mark as Completed
+            </button>
+        </form>
+        {% endif %}
+    </div>
+
+</body>
+</html>
